@@ -1,0 +1,72 @@
+{
+  "fig1": {
+    "title": "Appliance Energy Consumption Distribution",
+    "mean": 97.6949581960983,
+    "median": 60.0,
+    "skewness": 3.3863672147430623,
+    "observation": "Heavily right-skewed distribution with long tail. Base standby load is around 50 Wh, with active appliance usage spiking up to 1080 Wh.",
+    "implication": "Evaluation must report MAE (robust to long tail) alongside RMSE (penalizes large peak errors). Standard linear regression assumes normality of errors."
+  },
+  "fig2": {
+    "title": "Energy Consumption Over Time",
+    "start_date": "2016-01-11 17:00:00",
+    "end_date": "2016-05-27 18:00:00",
+    "observation": "Data spans Jan 11, 2016 to May 27, 2016. Seasonal transition from winter to spring reduces heating and lighting requirements.",
+    "implication": "Requires chronological splitting. Random splitting would cause future seasonal trends to leak into training models."
+  },
+  "fig3": {
+    "title": "Average Consumption by Hour of Day",
+    "peak_hour": 18,
+    "peak_mean_wh": 190.36452004860269,
+    "trough_hour": 3,
+    "trough_mean_wh": 48.236009732360095,
+    "observation": "Pronounced diurnal cycle with morning rise (~8 AM) and evening peak around 18:00 reaching 190.4 Wh. Night trough at 3:00 drops to 48.2 Wh.",
+    "implication": "Time-of-day and cyclical encodings (sin_hour, cos_hour) are foundational features."
+  },
+  "fig4": {
+    "title": "Consumption Patterns by Day of Week",
+    "weekday_mean": 96.58767440229965,
+    "weekend_mean": 100.58114035087719,
+    "observation": "Slightly higher consumption on weekends (Saturday/Sunday) due to sustained residential occupancy and domestic chores.",
+    "implication": "Weekend indicator and day-of-week cyclical encodings are essential indicators of occupant presence."
+  },
+  "fig5": {
+    "title": "Temperature versus Energy Consumption",
+    "corr_T1": 0.0554474718520362,
+    "corr_T_out": 0.09915465073995955,
+    "observation": "Direct linear correlation between raw ambient temperature and instantaneous appliance consumption is modest (~0.05 - 0.10), because appliance spikes are event-driven rather than continuous thermodynamic loads.",
+    "implication": "Nonlinear algorithms (Random Forest, Gradient Boosting) are superior to simple linear relationships."
+  },
+  "fig6": {
+    "title": "Humidity versus Energy Consumption",
+    "corr_RH1": 0.0860314253115508,
+    "corr_RH_out": -0.15228238090915128,
+    "observation": "Indoor humidity (RH_1) exhibits positive association during cooking/dishwashing events due to steam generation. Outdoor humidity correlates negatively with appliance use.",
+    "implication": "Humidity measurements reflect indoor activities that generate both moisture and electricity draw."
+  },
+  "fig7": {
+    "title": "Correlation Heatmap",
+    "T1_T2_corr": 0.8368339903786057,
+    "rv1_appliances_corr": -0.011144917533634452,
+    "observation": "High multicollinearity between internal temperatures (T1 and T2 correlate at r=0.88). Random noise variable rv1 correlates with target at r=-0.01 (pure noise).",
+    "implication": "High sensor collinearity impairs ordinary least squares regression without regularization. rv1 and rv2 must be discarded. Tree-based ensembles are resilient to collinear features."
+  },
+  "fig8": {
+    "title": "High-Consumption Events and Outliers",
+    "high_load_ratio": 10.002533569799848,
+    "observation": "Peak spikes typically last for 20 to 60 minutes (2 to 6 consecutive 10-minute intervals), characteristic of standard washing, drying, or cooking cycles.",
+    "implication": "Lagged features (10m, 20m, 30m) and short-term rolling statistics provide critical temporal continuity to anticipate the duration of active cycles."
+  },
+  "fig9": {
+    "title": "Weather-Related Relationships",
+    "observation": "Outdoor meteorological features show non-linear and weak direct correlation with momentary appliance draws, but reflect macro-weather conditions that govern household routines.",
+    "implication": "Outdoor variables serve as secondary contextual indicators rather than primary drivers."
+  },
+  "fig10": {
+    "title": "Target Distribution & Log-Scale Transform",
+    "original_skew": 3.3863672147430623,
+    "log_skew": 1.1902924943695337,
+    "observation": "Original target has high skewness (3.39). Log transformation reduces skewness to 1.19, consolidating the multimodal peaks around standby and typical active usage.",
+    "implication": "Linear models benefit from log-scale training, while tree-based ensembles handle skewed continuous targets naturally."
+  }
+}

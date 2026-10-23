@@ -1,0 +1,154 @@
+[
+  {
+    "model": "Baseline: Mean",
+    "split": "Validation",
+    "MAE_Wh": 53.666,
+    "MSE_Wh2": 8183.563,
+    "RMSE_Wh": 90.463,
+    "R2": -0.0057
+  },
+  {
+    "model": "Baseline: Mean",
+    "split": "Test",
+    "MAE_Wh": 52.899,
+    "MSE_Wh2": 8280.039,
+    "RMSE_Wh": 90.995,
+    "R2": -0.0004
+  },
+  {
+    "model": "Baseline: Naive Persistence",
+    "split": "Validation",
+    "MAE_Wh": 25.786,
+    "MSE_Wh2": 4291.967,
+    "RMSE_Wh": 65.513,
+    "R2": 0.4726
+  },
+  {
+    "model": "Baseline: Naive Persistence",
+    "split": "Test",
+    "MAE_Wh": 26.723,
+    "MSE_Wh2": 4460.361,
+    "RMSE_Wh": 66.786,
+    "R2": 0.4611
+  },
+  {
+    "model": "Ridge Regression",
+    "split": "Train",
+    "MAE_Wh": 31.762,
+    "MSE_Wh2": 4578.848,
+    "RMSE_Wh": 67.667,
+    "R2": 0.6008
+  },
+  {
+    "model": "Ridge Regression",
+    "split": "Validation",
+    "MAE_Wh": 27.229,
+    "MSE_Wh2": 3521.483,
+    "RMSE_Wh": 59.342,
+    "R2": 0.5672
+  },
+  {
+    "model": "Ridge Regression",
+    "split": "Test",
+    "MAE_Wh": 26.693,
+    "MSE_Wh2": 3663.309,
+    "RMSE_Wh": 60.525,
+    "R2": 0.5574
+  },
+  {
+    "model": "Random Forest (Default)",
+    "split": "Train",
+    "MAE_Wh": 18.206,
+    "MSE_Wh2": 1466.117,
+    "RMSE_Wh": 38.29,
+    "R2": 0.8722
+  },
+  {
+    "model": "Random Forest (Default)",
+    "split": "Validation",
+    "MAE_Wh": 33.83,
+    "MSE_Wh2": 4125.464,
+    "RMSE_Wh": 64.23,
+    "R2": 0.493
+  },
+  {
+    "model": "Random Forest (Default)",
+    "split": "Test",
+    "MAE_Wh": 50.934,
+    "MSE_Wh2": 6504.283,
+    "RMSE_Wh": 80.649,
+    "R2": 0.2141
+  },
+  {
+    "model": "Hist Gradient Boosting (Default)",
+    "split": "Train",
+    "MAE_Wh": 24.616,
+    "MSE_Wh2": 2815.181,
+    "RMSE_Wh": 53.058,
+    "R2": 0.7546
+  },
+  {
+    "model": "Hist Gradient Boosting (Default)",
+    "split": "Validation",
+    "MAE_Wh": 25.358,
+    "MSE_Wh2": 3181.359,
+    "RMSE_Wh": 56.404,
+    "R2": 0.609
+  },
+  {
+    "model": "Hist Gradient Boosting (Default)",
+    "split": "Test",
+    "MAE_Wh": 30.858,
+    "MSE_Wh2": 4086.877,
+    "RMSE_Wh": 63.929,
+    "R2": 0.5062
+  },
+  {
+    "model": "Tuned HistGradientBoosting",
+    "split": "Train",
+    "MAE_Wh": 25.38,
+    "MSE_Wh2": 2964.379,
+    "RMSE_Wh": 54.446,
+    "R2": 0.7416
+  },
+  {
+    "model": "Tuned HistGradientBoosting",
+    "split": "Validation",
+    "MAE_Wh": 25.659,
+    "MSE_Wh2": 3245.653,
+    "RMSE_Wh": 56.971,
+    "R2": 0.6011
+  },
+  {
+    "model": "Tuned HistGradientBoosting",
+    "split": "Test",
+    "MAE_Wh": 28.185,
+    "MSE_Wh2": 3848.054,
+    "RMSE_Wh": 62.033,
+    "R2": 0.5351
+  },
+  {
+    "model": "Tuned Random Forest",
+    "split": "Train",
+    "MAE_Wh": 22.241,
+    "MSE_Wh2": 2271.206,
+    "RMSE_Wh": 47.657,
+    "R2": 0.802
+  },
+  {
+    "model": "Tuned Random Forest",
+    "split": "Validation",
+    "MAE_Wh": 30.68,
+    "MSE_Wh2": 3711.987,
+    "RMSE_Wh": 60.926,
+    "R2": 0.5438
+  },
+  {
+    "model": "Tuned Random Forest",
+    "split": "Test",
+    "MAE_Wh": 41.001,
+    "MSE_Wh2": 4859.934,
+    "RMSE_Wh": 69.713,
+    "R2": 0.4128
+  }
+]

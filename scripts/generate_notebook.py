@@ -1,0 +1,241 @@
+"""
+Script to create the complete Jupyter Notebook for university submission.
+"""
+
+import json
+import os
+
+notebook_cells = [
+    {
+        "cell_type": "markdown",
+        "metadata": {},
+        "source": [
+            "# Smart Home Energy Consumption Prediction and Optimization\n",
+            "**University Machine Learning Innovative Assignment**  \n",
+            "**Domain:** Smart Energy Management  \n",
+            "**Dataset:** UCI Appliances Energy Prediction (`energydata_complete.csv`)  \n",
+            "**Task:** Predict household appliance energy consumption (Wh) for the next 10-minute interval ($t+1$) using information available at or before current time $t$."
+        ]
+    },
+    {
+        "cell_type": "markdown",
+        "metadata": {},
+        "source": [
+            "## 1. Imports and Setup"
+        ]
+    },
+    {
+        "cell_type": "code",
+        "execution_count": None,
+        "metadata": {},
+        "outputs": [],
+        "source": [
+            "import os\n",
+            "import sys\n",
+            "import json\n",
+            "import numpy as np\n",
+            "import pandas as pd\n",
+            "import matplotlib.pyplot as plt\n",
+            "import seaborn as sns\n",
+            "\n",
+            "# Add src directory to path\n",
+            "sys.path.append(os.path.abspath('../src'))\n",
+            "from data_preparation import load_and_prepare_data\n",
+            "from preprocessing import analyze_target_distribution, chronological_split\n",
+            "from feature_engineering import create_features\n",
+            "from predict import EnergyPredictor\n",
+            "\n",
+            "plt.style.use('seaborn-v0_8-whitegrid' if 'seaborn-v0_8-whitegrid' in plt.style.available else 'default')\n",
+            "print('Imports successful!')"
+        ]
+    },
+    {
+        "cell_type": "markdown",
+        "metadata": {},
+        "source": [
+            "## 2. Stage 2 & 3: Data Loading & Preparation\n",
+            "We inspect raw data structure, verify strict 10-minute sampling intervals, sort chronologically, and ensure zero duplicate timestamps."
+        ]
+    },
+    {
+        "cell_type": "code",
+        "execution_count": None,
+        "metadata": {},
+        "outputs": [],
+        "source": [
+            "raw_path = '../data/raw/energydata_complete.csv'\n",
+            "processed_path = '../data/processed/clean_energydata.csv'\n",
+            "df_clean = load_and_prepare_data(raw_path, processed_path)\n",
+            "df_clean.head()"
+        ]
+    },
+    {
+        "cell_type": "markdown",
+        "metadata": {},
+        "source": [
+            "## 3. Stage 4 & 5: Data Preprocessing & Target Distribution Analysis\n",
+            "Here we verify that classification balancing techniques (such as SMOTE) are mathematically inapplicable to continuous Wh regression, and demonstrate why natural energy spikes must be retained."
+        ]
+    },
+    {
+        "cell_type": "code",
+        "execution_count": None,
+        "metadata": {},
+        "outputs": [],
+        "source": [
+            "target_analysis = analyze_target_distribution(df_clean)\n",
+            "print(json.dumps(target_analysis, indent=2))"
+        ]
+    },
+    {
+        "cell_type": "markdown",
+        "metadata": {},
+        "source": [
+            "## 4. Stage 6: Exploratory Data Analysis (Key Visual Insights)"
+        ]
+    },
+    {
+        "cell_type": "code",
+        "execution_count": None,
+        "metadata": {},
+        "outputs": [],
+        "source": [
+            "# Display generated publication figures from outputs/figures\n",
+            "from IPython.display import Image, display\n",
+            "\n",
+            "figures_to_show = [\n",
+            "    '../outputs/figures/fig1_appliance_distribution.png',\n",
+            "    '../outputs/figures/fig3_hourly_consumption_pattern.png',\n",
+            "    '../outputs/figures/fig7_correlation_heatmap.png',\n",
+            "    '../outputs/figures/fig8_high_consumption_zoom.png'\n",
+            "]\n",
+            "\n",
+            "for fig_path in figures_to_show:\n",
+            "    if os.path.exists(fig_path):\n",
+            "        display(Image(filename=fig_path))\n",
+            "    else:\n",
+            "        print(f'Figure {fig_path} not found. Run src/eda.py to generate.')"
+        ]
+    },
+    {
+        "cell_type": "markdown",
+        "metadata": {},
+        "source": [
+            "## 5. Stage 7: Feature Engineering & Leakage Prevention\n",
+            "We construct cyclical time encodings, past consumption lags (10m, 20m, 30m, 1h, 24h), historical rolling statistics, and domain thermal gradients. Random noise variables (`rv1`, `rv2`) are intentionally removed."
+        ]
+    },
+    {
+        "cell_type": "code",
+        "execution_count": None,
+        "metadata": {},
+        "outputs": [],
+        "source": [
+            "featured_path = '../data/processed/featured_energydata.csv'\n",
+            "df_feat = pd.read_csv(featured_path)\n",
+            "print(f'Engineered features shape: {df_feat.shape}')\n",
+            "print('Engineered features list:', df_feat.columns.tolist()[:15], '...')"
+        ]
+    },
+    {
+        "cell_type": "markdown",
+        "metadata": {},
+        "source": [
+            "## 6. Stage 8, 9, 10, 11: Model Training, Tuning & Evaluation\n",
+            "Compare Baselines (Mean, Persistence) against Machine Learning Models (Ridge Regression, Random Forest, HistGradientBoosting)."
+        ]
+    },
+    {
+        "cell_type": "code",
+        "execution_count": None,
+        "metadata": {},
+        "outputs": [],
+        "source": [
+            "metrics_path = '../outputs/metrics/model_comparison.csv'\n",
+            "if os.path.exists(metrics_path):\n",
+            "    metrics_df = pd.read_csv(metrics_path)\n",
+            "    print('--- Model Comparison Table ---')\n",
+            "    display(metrics_df)\n",
+            "else:\n",
+            "    print('Run src/train.py first to generate metrics.')"
+        ]
+    },
+    {
+        "cell_type": "markdown",
+        "metadata": {},
+        "source": [
+            "## 7. Stage 11: Diagnostic Plots & Error Dissection"
+        ]
+    },
+    {
+        "cell_type": "code",
+        "execution_count": None,
+        "metadata": {},
+        "outputs": [],
+        "source": [
+            "eval_figs = [\n",
+            "    '../outputs/figures/eval_fig1_actual_vs_predicted.png',\n",
+            "    '../outputs/figures/eval_fig2_residual_distribution.png',\n",
+            "    '../outputs/figures/eval_fig4_model_comparison_bars.png',\n",
+            "    '../outputs/figures/eval_fig6_high_consumption_error_analysis.png'\n",
+            "]\n",
+            "\n",
+            "for fig_path in eval_figs:\n",
+            "    if os.path.exists(fig_path):\n",
+            "        display(Image(filename=fig_path))\n",
+            "    else:\n",
+            "        print(f'Figure {fig_path} not found. Run src/evaluation.py to generate.')"
+        ]
+    },
+    {
+        "cell_type": "markdown",
+        "metadata": {},
+        "source": [
+            "## 8. Real-Time Inference & Energy Cost Optimization Demonstration"
+        ]
+    },
+    {
+        "cell_type": "code",
+        "execution_count": None,
+        "metadata": {},
+        "outputs": [],
+        "source": [
+            "predictor = EnergyPredictor(model_path='../models/best_model.joblib', features_path='../models/feature_names.json')\n",
+            "test_preds = pd.read_csv('../outputs/metrics/test_predictions.csv')\n",
+            "\n",
+            "# Select real test sample\n",
+            "sample = test_preds.iloc[100].to_dict()\n",
+            "prediction_result = predictor.predict(sample, tariff_per_kwh=0.18)\n",
+            "\n",
+            "print('Actual Next Consumption:   ', sample['target_next_appliances'], 'Wh')\n",
+            "print('Predicted Next Consumption:', prediction_result['predicted_consumption_Wh'], 'Wh')\n",
+            "print('Predicted Next (kWh):      ', prediction_result['predicted_consumption_kWh'], 'kWh')\n",
+            "print('Estimated Interval Cost:   ', f\"${prediction_result['estimated_interval_cost']:.4f}\")\n",
+            "print('95% Confidence Interval:   ', prediction_result['prediction_interval_95_Wh'], 'Wh')\n",
+            "print('Advisory Recommendation:   ', prediction_result['exploratory_suggestion'])"
+        ]
+    }
+]
+
+notebook_json = {
+    "cells": notebook_cells,
+    "metadata": {
+        "language_info": {
+            "name": "python",
+            "version": "3.14.7"
+        },
+        "kernelspec": {
+            "name": "python3",
+            "display_name": "Python 3"
+        }
+    },
+    "nbformat": 4,
+    "nbformat_minor": 4
+}
+
+out_path = os.path.join('notebooks', 'exploratory_analysis.ipynb')
+os.makedirs('notebooks', exist_ok=True)
+with open(out_path, 'w', encoding='utf-8') as f:
+    json.dump(notebook_json, f, indent=2)
+
+print(f"Jupyter Notebook successfully written to: {out_path}")

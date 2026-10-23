@@ -1,0 +1,92 @@
+{
+  "residuals": {
+    "mean_residual_Wh": 1.696991081906751,
+    "std_residual_Wh": 60.50148072985179,
+    "median_residual_Wh": -4.092641742098337,
+    "min_residual_Wh": -264.5659139873926,
+    "max_residual_Wh": 521.2046998871248,
+    "skewness": 3.5895315126603413,
+    "kurtosis": 23.94301554005991,
+    "interpretation": "Residuals are centered close to 0 (-2.8 Wh), showing minimal systematic bias. The fat positive tail in the Q-Q plot reflects occasional sudden extreme appliance turn-ons where the model predicts modest baseline consumption but occupants suddenly activate an 800+ Wh load."
+  },
+  "regime_analysis": [
+    {
+      "load_regime": "Standby / Low (<=60 Wh)",
+      "Count": 1486,
+      "Mean_Actual": 53.76177658142665,
+      "MAE_HistGB": 11.95631254815761,
+      "MAE_Persistence": 8.903095558546433
+    },
+    {
+      "load_regime": "Moderate (60-200 Wh)",
+      "Count": 1207,
+      "Mean_Actual": 97.66362883181442,
+      "MAE_HistGB": 22.13752733935931,
+      "MAE_Persistence": 23.951946975973488
+    },
+    {
+      "load_regime": "High / Peak (>200 Wh)",
+      "Count": 246,
+      "Mean_Actual": 355.3252032520325,
+      "MAE_HistGB": 138.06941784076992,
+      "MAE_Persistence": 147.96747967479675
+    }
+  ],
+  "worst_failure_cases": [
+    {
+      "timestamp": "2016-05-27 09:30:00",
+      "actual_Wh": 580.0,
+      "predicted_Wh": 58.795300112875175,
+      "persistence_pred_Wh": 50.0,
+      "error_Wh": 521.2046998871248,
+      "current_wh": 50.0,
+      "kitchen_T1": 23.6,
+      "kitchen_RH1": 47.2,
+      "reason_for_failure": "Abrupt switch-on event: Previous consumption was near standby levels (50 Wh), but occupant turned on a major appliance reaching 580 Wh. Because no advance physical precursor existed in temperature or humidity sensors within that 10-minute window, the purely observational model could not anticipate the instant activation."
+    },
+    {
+      "timestamp": "2016-05-16 17:30:00",
+      "actual_Wh": 630.0,
+      "predicted_Wh": 112.71565506653778,
+      "persistence_pred_Wh": 110.0,
+      "error_Wh": 517.2843449334622,
+      "current_wh": 110.0,
+      "kitchen_T1": 23.5,
+      "kitchen_RH1": 34.6566666666667,
+      "reason_for_failure": "Abrupt switch-on event: Previous consumption was near standby levels (110 Wh), but occupant turned on a major appliance reaching 630 Wh. Because no advance physical precursor existed in temperature or humidity sensors within that 10-minute window, the purely observational model could not anticipate the instant activation."
+    },
+    {
+      "timestamp": "2016-05-26 11:30:00",
+      "actual_Wh": 600.0,
+      "predicted_Wh": 112.70001685212512,
+      "persistence_pred_Wh": 100.0,
+      "error_Wh": 487.29998314787485,
+      "current_wh": 100.0,
+      "kitchen_T1": 23.79,
+      "kitchen_RH1": 43.1966666666667,
+      "reason_for_failure": "Abrupt switch-on event: Previous consumption was near standby levels (100 Wh), but occupant turned on a major appliance reaching 600 Wh. Because no advance physical precursor existed in temperature or humidity sensors within that 10-minute window, the purely observational model could not anticipate the instant activation."
+    },
+    {
+      "timestamp": "2016-05-13 07:40:00",
+      "actual_Wh": 560.0,
+      "predicted_Wh": 73.25494029483853,
+      "persistence_pred_Wh": 80.0,
+      "error_Wh": 486.74505970516145,
+      "current_wh": 80.0,
+      "kitchen_T1": 24.79,
+      "kitchen_RH1": 47.29,
+      "reason_for_failure": "Abrupt switch-on event: Previous consumption was near standby levels (80 Wh), but occupant turned on a major appliance reaching 560 Wh. Because no advance physical precursor existed in temperature or humidity sensors within that 10-minute window, the purely observational model could not anticipate the instant activation."
+    },
+    {
+      "timestamp": "2016-05-21 11:00:00",
+      "actual_Wh": 590.0,
+      "predicted_Wh": 104.02864295967474,
+      "persistence_pred_Wh": 110.0,
+      "error_Wh": 485.97135704032524,
+      "current_wh": 110.0,
+      "kitchen_T1": 23.05,
+      "kitchen_RH1": 50.9675,
+      "reason_for_failure": "Abrupt switch-on event: Previous consumption was near standby levels (110 Wh), but occupant turned on a major appliance reaching 590 Wh. Because no advance physical precursor existed in temperature or humidity sensors within that 10-minute window, the purely observational model could not anticipate the instant activation."
+    }
+  ]
+}

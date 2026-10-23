@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Home Energy Management - Group Presentation Deck</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --slide-bg: #111827;
+            --primary: #3b82f6;
+            --secondary: #10b981;
+            --accent: #f59e0b;
+            --text-main: #f9fafb;
+            --text-muted: #9ca3af;
+            --border: #1f2937;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            background: var(--bg-color);
+            color: var(--text-main);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .slide-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .slide {
+            display: none;
+            width: 100%;
+            max-width: 1150px;
+            height: 650px;
+            background: var(--slide-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 3rem 4rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        .slide.active {
+            display: flex;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .slide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .slide-title {
+            font-size: 1.85rem;
+            font-weight: 800;
+            color: #60a5fa;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .speaker-badge {
+            background: #1e3a8a;
+            color: #93c5fd;
+            padding: 0.35rem 0.8rem;
+            border-radius: 9999px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            border: 1px solid #3b82f6;
+        }
+
+        .slide-body {
+            flex: 1;
+            font-size: 1.05rem;
+            color: #e5e7eb;
+            line-height: 1.6;
+            overflow-y: auto;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .highlight-box {
+            background: rgba(59, 130, 246, 0.08);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 10px;
+            padding: 1.25rem;
+            margin-top: 1rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+            margin-top: 1rem;
+        }
+
+        th, td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background: #0f172a;
+            color: #94a3b8;
+            font-weight: 700;
+        }
+
+        .footer-controls {
+            background: rgba(17, 24, 39, 0.9);
+            border-top: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn-ctrl {
+            background: #1f2937;
+            color: white;
+            border: 1px solid var(--border);
+            padding: 0.5rem 1.2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-ctrl:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .progress-bar {
+            width: 200px;
+            height: 6px;
+            background: #1f2937;
+            border-radius: 9999px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--primary);
+            width: 10%;
+            transition: width 0.3s;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="slide-container">
+        <!-- Slide 1 -->
+        <div class="slide active">
+            <div class="slide-header">
+                <div class="slide-title"><i class="fa-solid fa-bolt"></i> Smart Home Energy Management</div>
+                <div class="speaker-badge">Team Overview</div>
+            </div>
+            <div class="slide-body" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+                <h1 style="font-size: 2.3rem; font-weight: 800; color: #f9fafb; margin-bottom: 0.8rem;">
+                    Household Appliance Energy Consumption Prediction & Optimization
+                </h1>
+                <p style="font-size: 1.15rem; color: #9ca3af; max-width: 800px; margin-bottom: 2rem;">
+                    An End-to-End, Leak-Free, Academically Rigorous Machine Learning Solution for 10-Minute Residential Load Forecasting
+                </p>
+                <div class="grid-2" style="width: 100%; max-width: 900px; text-align: left;">
+                    <div class="highlight-box">
+                        <strong style="color: #60a5fa;"><i class="fa-solid fa-user-group"></i> 4-Speaker Team Allocation:</strong>
+                        <ul style="margin-top: 0.5rem; padding-left: 1.2rem; font-size: 0.95rem;">
+                            <li><strong>Speaker 1:</strong> Problem Statement, Stakeholders & Dataset Provenance</li>
+                            <li><strong>Speaker 2:</strong> Preprocessing, Outlier Strategy & EDA Insights</li>
+                        </ul>
+                    </div>
+                    <div class="highlight-box">
+                        <strong style="color: #10b981;"><i class="fa-solid fa-code"></i> Pipeline & Results:</strong>
+                        <ul style="margin-top: 0.5rem; padding-left: 1.2rem; font-size: 0.95rem;">
+                            <li><strong>Speaker 3:</strong> Feature Engineering, Baselines & ML Models</li>
+                            <li><strong>Speaker 4:</strong> Model Comparison, Live Demo & Academic Limits</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="slide">
+            <div class="slide-header">
+                <div class="slide-title"><i class="fa-solid fa-bullseye"></i> Problem Formulation & Context</div>
+                <div class="speaker-badge">Speaker 1: Problem Definition</div>
+            </div>
+            <div class="slide-body">
+                <div class="grid-2">
+                    <div>
+                        <h3 style="color:#60a5fa; margin-bottom: 0.75rem;">The Engineering Challenge</h3>
+                        <p>Residential appliances (cooktops, washing machines, dryers) cause sudden electrical load surges that stress local grid transformers and drive peak electricity bills.</p>
+                        <div class="highlight-box" style="margin-top: 1.2rem;">
+                            <strong>Core Task Formulation:</strong>
+                            <p style="margin-top: 0.4rem; font-style: italic;">"Predict appliance energy consumption (Wh) for the next 10-minute interval ($t+1$) using only historical and environmental observations up to time $t$."</p>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 style="color:#10b981; margin-bottom: 0.75rem;">Information Boundary (Zero Lookahead)</h3>
+                        <ul style="padding-left: 1.25rem; line-height: 1.8;">
+                            <li><i class="fa-solid fa-check" style="color:#10b981;"></i> <strong>Known at time $t$:</strong> Room temperatures ($T_1 \dots T_9$), humidities ($RH_1 \dots RH_9$), outdoor weather, historical consumption ($y_t, y_{t-1}, y_{t-6}$).</li>
+                            <li><i class="fa-solid fa-xmark" style="color:#ef4444;"></i> <strong>Unknown:</strong> Future consumption ($y_{t+1}$) and future weather/sensor conditions.</li>
+                            <li><strong>Impact:</strong> Enables automated Home Energy Management Systems (HEMS) to shift discretionary loads.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="slide">
+            <div class="slide-header">
+                <div class="slide-title"><i class="fa-solid fa-database"></i> Dataset Description & Noise Audit</div>
+                <div class="speaker-badge">Speaker 1: Data Understanding</div>
+            </div>
+            <div class="slide-body">
+                <div class="grid-2">
+                    <div>
+                        <h3 style="color:#60a5fa; margin-bottom: 0.75rem;">UCI Appliances Energy Dataset</h3>
+                        <ul style="padding-left: 1.25rem; line-height: 1.8;">
+                            <li><strong>Author:</strong> Luis Candanedo et al. (Univ. of Mons, Belgium, 2017).</li>
+                            <li><strong>Building:</strong> Low-energy single-family house in Stambruges, Belgium.</li>
+                            <li><strong>Span:</strong> 137 days (Jan 11, 2016 – May 27, 2016).</li>
+                            <li><strong>Observations:</strong> 19,735 rows logged at uniform 10-minute intervals.</li>
+                            <li><strong>Sensors:</strong> ZigBee network measuring 9 room temperatures and 9 room relative humidities.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 style="color:#f59e0b; margin-bottom: 0.75rem;">Investigation of rv1 and rv2</h3>
+                        <p>The dataset contains two synthetic random variables (`rv1`, `rv2`).</p>
+                        <div class="highlight-box">
+                            <strong>Findings:</strong>
+                            <ul style="margin-top: 0.5rem; padding-left: 1.25rem;">
+                                <li>`rv1` and `rv2` are mathematically identical.</li>
+                                <li>Correlation with appliance energy is $r = -0.011$ (pure noise).</li>
+                                <li><strong>Decision:</strong> Explicitly dropped during feature selection to protect generalization.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="slide">
+            <div class="slide-header">
+                <div class="slide-title"><i class="fa-solid fa-filter"></i> Preprocessing & Outlier Strategy</div>
+                <div class="speaker-badge">Speaker 2: Preprocessing</div>
+            </div>
+            <div class="slide-body">
+                <div class="grid-2">
+                    <div>
+                        <h3 style="color:#60a5fa; margin-bottom: 0.75rem;">Quality & Chronological Splitting</h3>
+                        <ul style="padding-left: 1.25rem; line-height: 1.8;">
+                            <li><strong>Missing Values:</strong> Verified 0 missing values across all columns.</li>
+                            <li><strong>Zero Leakage Split:</strong> Strict temporal ordering:
+                                <ul>
+                                    <li>Train: 70% (13,713 rows, Jan 12 – Apr 16)</li>
+                                    <li>Validation: 15% (2,938 rows, Apr 16 – May 07)</li>
+                                    <li>Test: 15% (2,939 rows, May 07 – May 27)</li>
+                                </ul>
+                            </li>
+                            <li>Scalers fitted <em>strictly</em> on training split only!</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 style="color:#ef4444; margin-bottom: 0.75rem;">The Outlier & Balancing Debate</h3>
+                        <div class="highlight-box">
+                            <strong>1. Outlier Decision:</strong>
+                            <p style="font-size: 0.9rem; margin-top: 0.3rem;">Energy spikes up to $1080\text{ Wh}$ are legitimate physical appliance events (e.g., ovens, dryers). Deleting them would blind the system to peak demand.</p>
+                        </div>
+                        <div class="highlight-box" style="margin-top: 0.8rem;">
+                            <strong>2. Data Balancing in Regression:</strong>
+                            <p style="font-size: 0.9rem; margin-top: 0.3rem;">SMOTE and classification resampling are mathematically inapplicable to continuous Wh regression. Tree ensembles natively manage right-skewed distributions.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5 -->
+        <div class="slide">
+            <div class="slide-header">
+                <div class="slide-title"><i class="fa-solid fa-chart-pie"></i> Exploratory Data Analysis (EDA)</div>
+                <div class="speaker-badge">Speaker 2: EDA Insights</div>
+            </div>
+            <div class="slide-body">
+                <div class="grid-2">
+                    <div>
+                        <h4 style="color:#60a5fa;"><i class="fa-solid fa-clock"></i> Diurnal Hourly Cycle</h4>
+                        <p style="font-size: 0.95rem; margin-top: 0.3rem;">Marked daily swing: night trough at 03:00 ($48.2\text{ Wh}$) rising to a sharp evening cooking peak at 18:00 ($190.4\text{ Wh}$). Cyclical hour features are essential.</p>
+                        <h4 style="color:#10b981; margin-top: 1rem;"><i class="fa-solid fa-calendar-day"></i> Day-of-Week Effect</h4>
+                        <p style="font-size: 0.95rem; margin-top: 0.3rem;">Weekends exhibit slightly higher daytime baselines ($100.6\text{ Wh}$ vs $96.6\text{ Wh}$) due to sustained residential occupancy.</p>
+                    </div>
+                    <div>
+                        <h4 style="color:#f59e0b;"><i class="fa-solid fa-temperature-half"></i> Multicollinearity in Sensors</h4>
+                        <p style="font-size: 0.95rem; margin-top: 0.3rem;">Kitchen ($T_1$) and living room ($T_2$) correlate at $r = 0.84$. Regularized regression (Ridge) or tree ensembles are mandatory to handle high feature collinearity.</p>
+                        <h4 style="color:#ec4899; margin-top: 1rem;"><i class="fa-solid fa-stopwatch"></i> Spike Duration Continuity</h4>
+                        <p style="font-size: 0.95rem; margin-top: 0.3rem;">Major loads persist across 20–60 minutes (2 to 6 consecutive 10-minute intervals). Past consumption lags provide powerful predictive continuity.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6 -->
+        <div class="slide">
+            <div class="slide-header">
+                <div class="slide-title"><i class="fa-solid fa-wand-magic-sparkles"></i> Feature Engineering Architecture</div>
+                <div class="speaker-badge">Speaker 3: Features & Baselines</div>
+            </div>
+            <div class="slide-body">
+                <div class="grid-2">
+                    <div>
+                        <h3 style="color:#60a5fa; margin-bottom: 0.75rem;">49 Leak-Free Features Engineered</h3>
+                        <ul style="padding-left: 1.25rem; line-height: 1.7; font-size: 0.95rem;">
+                            <li><strong>Cyclical Time:</strong> $\sin(2\pi h / 24), \cos(2\pi h / 24), \sin(\text{day}), \cos(\text{day})$.</li>
+                            <li><strong>Autoregressive Lags:</strong> Current load $y_t$, $10\text{m}$ ($y_{t-1}$), $20\text{m}$, $30\text{m}$, $1\text{h}$ ($y_{t-6}$), $24\text{h}$ ($y_{t-144}$).</li>
+                            <li><strong>Rolling Past Stats:</strong> 30-min mean & std, 1-hour mean & max (computed strictly on $\tau \le t$).</li>
+                            <li><strong>Domain Thermal Gradients:</strong> $T_1 - T_{out}$ (indoor/outdoor gradient), $T_1 - T_2$ (cooking thermal signature).</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 style="color:#10b981; margin-bottom: 0.75rem;">Baseline Benchmark Standards</h3>
+                        <div class="highlight-box">
+                            <strong>1. Mean Target Baseline:</strong>
+                            <p style="font-size: 0.9rem; margin-top: 0.25rem;">Predicts training mean ($97.7\text{ Wh}$). Validation RMSE: <strong>90.46 Wh</strong> ($R^2 = -0.0057$).</p>
+                        </div>
+                        <div class="highlight-box" style="margin-top: 0.75rem;">
+                            <strong>2. Naive Persistence Baseline:</strong>
+                            <p style="font-size: 0.9rem; margin-top: 0.25rem;">Predicts next = current draw ($\hat{y}_{t+1} = y_t$). Validation RMSE: <strong>65.51 Wh</strong> ($R^2 = 0.4726$). A formidable reference!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7 -->
+        <div class="slide">
+            <div class="slide-header">
+                <div class="slide-title"><i class="fa-solid fa-gears"></i> Model Development & Tuning</div>
+                <div class="speaker-badge">Speaker 3: Machine Learning</div>
+            </div>
+            <div class="slide-body">
+                <div class="grid-2">
+                    <div>
+                        <h3 style="color:#60a5fa; margin-bottom: 0.75rem;">Candidate ML Algorithms</h3>
+                        <div class="highlight-box">
+                            <strong>Model 1 — Ridge Linear Regression:</strong>
+                            <p style="font-size: 0.88rem; margin-top: 0.2rem;">L2-regularized pipeline with StandardScaler. Solves multicollinearity while retaining full interpretability.</p>
+                        </div>
+                        <div class="highlight-box" style="margin-top: 0.6rem;">
+                            <strong>Model 2 — Random Forest Regressor:</strong>
+                            <p style="font-size: 0.88rem; margin-top: 0.2rem;">Ensemble of 150 bagged decision trees. Captures non-linear feature interactions.</p>
+                        </div>
+                        <div class="highlight-box" style="margin-top: 0.6rem;">
+                            <strong>Model 3 — Histogram Gradient Boosting:</strong>
+                            <p style="font-size: 0.88rem; margin-top: 0.2rem;">Histogram-binned boosting. State-of-the-art efficiency and predictive accuracy.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 style="color:#f59e0b; margin-bottom: 0.75rem;">Time-Series Tuning Strategy</h3>
+                        <p style="font-size: 0.95rem;">Standard K-Fold randomly scrambles time and creates temporal leakage. We employed <strong>TimeSeriesSplit(n_splits=3)</strong> exclusively on training data.</p>
+                        <div class="highlight-box" style="margin-top: 1rem;">
+                            <strong>Best HistGB Hyperparameters:</strong>
+                            <ul style="font-size: 0.88rem; padding-left: 1.25rem; margin-top: 0.3rem;">
+                                <li>Learning Rate: <strong>0.05</strong></li>
+                                <li>Max Depth: <strong>12</strong></li>
+                                <li>Min Samples Leaf: <strong>15</strong></li>
+                                <li>L2 Regularization: <strong>0.5</strong></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8 -->
+        <div class="slide">
+            <div class="slide-header">
+                <div class="slide-title"><i class="fa-solid fa-square-poll-vertical"></i> Benchmark Results & Evaluation</div>
+                <div class="speaker-badge">Speaker 4: Results & Evaluation</div>
+            </div>
+            <div class="slide-body">
+                <p style="margin-bottom: 0.75rem;">Empirical validation on chronological Validation ($N=2,938$) and untouched Holdout Test ($N=2,939$) sets:</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Model Architecture</th>
+                            <th>Data Split</th>
+                            <th>MAE (Wh)</th>
+                            <th>RMSE (Wh)</th>
+                            <th>R² Score</th>
+                            <th>Verdict</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background: rgba(59, 130, 246, 0.15);">
+                            <td><strong>HistGradientBoosting (Default)</strong></td>
+                            <td><strong>Validation</strong></td>
+                            <td><strong>25.36</strong></td>
+                            <td><strong>56.40</strong></td>
+                            <td><strong>0.6090</strong></td>
+                            <td><strong style="color:#60a5fa;">Best Overall Model</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Tuned HistGradientBoosting</td>
+                            <td>Validation</td>
+                            <td>25.66</td>
+                            <td>56.97</td>
+                            <td>0.6011</td>
+                            <td>High stability</td>
+                        </tr>
+                        <tr>
+                            <td>Ridge Linear Regression</td>
+                            <td>Validation</td>
+                            <td>27.23</td>
+                            <td>59.34</td>
+                            <td>0.5672</td>
+                            <td>Interpretable linear benchmark</td>
+                        </tr>
+                        <tr>
+                            <td>Tuned Random Forest</td>
+                            <td>Validation</td>
+                            <td>30.68</td>
+                            <td>60.93</td>
+                            <td>0.5438</td>
+                            <td>Controlled tree variance</td>
+                        </tr>
+                        <tr>
+                            <td>Naive Persistence Baseline</td>
+                            <td>Validation</td>
+                            <td>25.79</td>
+                            <td>65.51</td>
+                            <td>0.4726</td>
+                            <td>Reference benchmark</td>
+                        </tr>
+                        <tr>
+                            <td>Mean Target Baseline</td>
+                            <td>Validation</td>
+                            <td>53.67</td>
+                            <td>90.46</td>
+                            <td>-0.0057</td>
+                            <td>Uninformative reference</td>
+                        </tr>
+                        <tr style="border-top: 2px solid #3b82f6;">
+                            <td><strong>Ridge Linear Regression</strong></td>
+                            <td><strong>Holdout Test</strong></td>
+                            <td><strong>26.69</strong></td>
+                            <td><strong>60.52</strong></td>
+                            <td><strong>0.5574</strong></td>
+                            <td><strong>Solid Out-of-Time Test Score</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Tuned HistGradientBoosting</td>
+                            <td>Holdout Test</td>
+                            <td>28.18</td>
+                            <td>62.03</td>
+                            <td>0.5351</td>
+                            <td>Maintains strong generalization</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Slide 9 -->
+        <div class="slide">
+            <div class="slide-header">
+                <div class="slide-title"><i class="fa-solid fa-microscope"></i> Diagnostic Error Dissection</div>
+                <div class="speaker-badge">Speaker 4: Error Analysis</div>
+            </div>
+            <div class="slide-body">
+                <div class="grid-2">
+                    <div>
+                        <h4 style="color:#60a5fa;"><i class="fa-solid fa-chart-line"></i> Residual Distribution</h4>
+                        <p style="font-size: 0.95rem; margin-top: 0.3rem;">Mean residual is <strong>$-2.80\text{ Wh}$</strong> (close to 0), proving negligible bias. Heavy right tail in Q-Q plot reflects unannounced occupant activations.</p>
+                        
+                        <h4 style="color:#10b981; margin-top: 1rem;"><i class="fa-solid fa-layer-group"></i> Consumption Regime Breakdown</h4>
+                        <ul style="font-size: 0.92rem; padding-left: 1.25rem; margin-top: 0.3rem; line-height: 1.6;">
+                            <li><strong>Standby ($\le 60\text{ Wh}$):</strong> MAE = <strong>11.8 Wh</strong> (Highly precise).</li>
+                            <li><strong>Moderate ($60\text{--}200\text{ Wh}$):</strong> MAE = <strong>32.4 Wh</strong>.</li>
+                            <li><strong>Peak Surge ($> 200\text{ Wh}$):</strong> MAE = <strong>114.6 Wh</strong>.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="color:#ef4444;"><i class="fa-solid fa-circle-exclamation"></i> Failure Case Audit</h4>
+                        <div class="highlight-box">
+                            <strong>Why Predictions Fail:</strong>
+                            <p style="font-size: 0.88rem; margin-top: 0.3rem;">The top 5 prediction failures occur during sudden unannounced switch-ons (e.g. baseline $50\text{ Wh}$ instantly surging to $820\text{ Wh}$). Observational sensor models cannot anticipate instantaneous human decisions without pre-event intent indicators.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10 -->
+        <div class="slide">
+            <div class="slide-header">
+                <div class="slide-title"><i class="fa-solid fa-laptop-code"></i> Live Application & Practical Impact</div>
+                <div class="speaker-badge">Speaker 4: Application & Limits</div>
+            </div>
+            <div class="slide-body">
+                <div class="grid-2">
+                    <div>
+                        <h3 style="color:#60a5fa; margin-bottom: 0.75rem;">Interactive Dashboard Modules</h3>
+                        <ul style="padding-left: 1.25rem; line-height: 1.7; font-size: 0.95rem;">
+                            <li><strong>Dashboard KPIs:</strong> Historical patterns & diurnal profiles.</li>
+                            <li><strong>Real-Time Predictor:</strong> Generates next 10-minute Wh, kWh, 95% uncertainty interval, and cost estimate.</li>
+                            <li><strong>Model Benchmark View:</strong> Side-by-side metric comparison and overfitting gap analysis.</li>
+                            <li><strong>Exploratory Advisory:</strong> Automated load shifting tips.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 style="color:#f59e0b; margin-bottom: 0.75rem;">Academic Integrity & Limitations</h3>
+                        <div class="highlight-box">
+                            <ul style="font-size: 0.88rem; padding-left: 1.25rem; line-height: 1.6;">
+                                <li><strong>Single Building Scope:</strong> Belgian dwelling over 4.5 months; requires localized retraining for different building classes.</li>
+                                <li><strong>Correlation vs Causation:</strong> Predictions reflect observational patterns, not experimentally guaranteed energy savings.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11 -->
+        <div class="slide">
+            <div class="slide-header">
+                <div class="slide-title"><i class="fa-solid fa-flag-checkered"></i> Summary & Deliverables</div>
+                <div class="speaker-badge">Conclusion: All Speakers</div>
+            </div>
+            <div class="slide-body" style="text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                <h2 style="font-size: 2rem; color: #10b981; margin-bottom: 1rem;"><i class="fa-solid fa-circle-check"></i> Project Complete & Verified</h2>
+                <div class="grid-2" style="max-width: 900px; text-align: left; margin-bottom: 1.5rem;">
+                    <div class="highlight-box">
+                        <strong>Complete ML Engineering Pipeline:</strong>
+                        <p style="font-size: 0.9rem; margin-top: 0.25rem;">All 12 pipeline stages implemented, validated, and evaluated without data leakage.</p>
+                    </div>
+                    <div class="highlight-box">
+                        <strong>Interactive Applications:</strong>
+                        <p style="font-size: 0.9rem; margin-top: 0.25rem;">Streamlit dashboard (`app/streamlit_app.py`) + Standalone Zero-Dependency GUI (`index.html`).</p>
+                    </div>
+                </div>
+                <p style="color: #94a3b8; font-size: 1.05rem;">Thank you! We welcome questions from the evaluation committee.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Footer Controls -->
+    <div class="footer-controls">
+        <button class="btn-ctrl" onclick="prevSlide()"><i class="fa-solid fa-arrow-left"></i> Previous</button>
+        <div style="display: flex; align-items: center; gap: 1rem;">
+            <div class="progress-bar">
+                <div id="progressFill" class="progress-fill"></div>
+            </div>
+            <span id="slideIndicator" style="font-size: 0.85rem; color: #94a3b8; font-weight: 600;">Slide 1 / 11</span>
+        </div>
+        <button class="btn-ctrl" onclick="nextSlide()">Next <i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const progressFill = document.getElementById('progressFill');
+        const slideIndicator = document.getElementById('slideIndicator');
+
+        function updateSlide() {
+            slides.forEach((s, idx) => {
+                s.classList.toggle('active', idx === currentSlide);
+            });
+            const progress = ((currentSlide + 1) / slides.length) * 100;
+            progressFill.style.width = progress + '%';
+            slideIndicator.innerText = `Slide ${currentSlide + 1} / ${slides.length}`;
+        }
+
+        function nextSlide() {
+            if (currentSlide < slides.length - 1) {
+                currentSlide++;
+                updateSlide();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlide();
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+    </script>
+</body>
+</html>

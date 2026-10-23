@@ -1,0 +1,20 @@
+model,split,MAE_Wh,MSE_Wh2,RMSE_Wh,R2
+Baseline: Mean,Validation,53.666,8183.563,90.463,-0.0057
+Baseline: Mean,Test,52.899,8280.039,90.995,-0.0004
+Baseline: Naive Persistence,Validation,25.786,4291.967,65.513,0.4726
+Baseline: Naive Persistence,Test,26.723,4460.361,66.786,0.4611
+Ridge Regression,Train,31.762,4578.848,67.667,0.6008
+Ridge Regression,Validation,27.229,3521.483,59.342,0.5672
+Ridge Regression,Test,26.693,3663.309,60.525,0.5574
+Random Forest (Default),Train,18.206,1466.117,38.29,0.8722
+Random Forest (Default),Validation,33.83,4125.464,64.23,0.493
+Random Forest (Default),Test,50.934,6504.283,80.649,0.2141
+Hist Gradient Boosting (Default),Train,24.616,2815.181,53.058,0.7546
+Hist Gradient Boosting (Default),Validation,25.358,3181.359,56.404,0.609
+Hist Gradient Boosting (Default),Test,30.858,4086.877,63.929,0.5062
+Tuned HistGradientBoosting,Train,25.38,2964.379,54.446,0.7416
+Tuned HistGradientBoosting,Validation,25.659,3245.653,56.971,0.6011
+Tuned HistGradientBoosting,Test,28.185,3848.054,62.033,0.5351
+Tuned Random Forest,Train,22.241,2271.206,47.657,0.802
+Tuned Random Forest,Validation,30.68,3711.987,60.926,0.5438
+Tuned Random Forest,Test,41.001,4859.934,69.713,0.4128
